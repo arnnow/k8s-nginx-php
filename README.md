@@ -111,7 +111,7 @@ mysql-575c4778f5-jfzbk   0/1     ContainerCreating   0          2m35s
 nginx-6b4755dc5b-ckgv6   1/1     Running             0          2m45s
 php-86d7b79898-blqt6     0/1     PodInitializing     0          2m40s
 ```
-## Checking what's happening 
+## Checking Mysql
 ```
 {21:22}~/Seafile/Priv/Soft/k8s/k8s-nginx-php:master ✗ ➭ kubectl describe pods mysql-575c4778f5-jfzbk
 Name:         mysql-575c4778f5-jfzbk
@@ -191,4 +191,29 @@ total 110596
 -rw-rw---- 1 999 999 12582912 Feb 11 20:21 ibdata1
 drwx------ 2 999 999     1620 Feb 11 20:21 mysql
 drwx------ 2 999 999     1100 Feb 11 20:21 performance_schema
+```
+Testing our Mysql pod
+```
+{21:33}~/k8s-nginx-php:master ✗ ➭ kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -pthisisnotsecure
+If you don't see a command prompt, try pressing enter.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+```
+# Visiting the site
+```bash
+{21:36}~/Seafile/Priv/Soft/k8s/k8s-nginx-php:master ✗ ➭ minikube service nginx
+|-----------|-------|-------------|-----------------------------|
+| NAMESPACE | NAME  | TARGET PORT |             URL             |
+|-----------|-------|-------------|-----------------------------|
+| default   | nginx |             | http://192.168.99.107:30362 |
+|-----------|-------|-------------|-----------------------------|
+* Opening service default/nginx in default browser...
 ```

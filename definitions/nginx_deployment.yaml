@@ -17,10 +17,9 @@ spec:
         tier: backend
     spec:
       volumes:
-      - name: php-files
-        hostPath:
-         path: /hosthome/arn/Seafile/Priv/Soft/k8s/nginx-php/files
-         type: Directory
+      - name: php-pv-storage
+        persistentVolumeClaim:
+          claimName: php-pv-claim
       - name: nginx-config
         configMap:
           name: nginx-config
@@ -29,11 +28,11 @@ spec:
              path: site.conf
       containers:
         - name: nginx
-          image: nginx:1.7.9
+          image: nginx:1.9.1
           ports:
            - containerPort: 80
           volumeMounts:
-            - name: php-files
+            - name: php-pv-storage
               mountPath: /data
             - name: nginx-config
               mountPath: /etc/nginx/conf.d

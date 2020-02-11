@@ -21,22 +21,19 @@ spec:
         image: php:7-fpm
         volumeMounts:
         - mountPath: /data
-          name: php-files
+          name: php-pv-storage
       volumes:
-      - name: php-files
-        hostPath:
-          # directory location on host
-          path: /hosthome/arn/Seafile/Priv/Soft/k8s/nginx-php/files
-          # this field is optional
-          type: Directory
+      - name: php-pv-storage
+        persistentVolumeClaim:
+          claimName: php-pv-claim
       initContainers:
         - name: install
           image: busybox
           volumeMounts:
-          - name: php-files
+          - name: php-pv-storage
             mountPath: /code
           command:
           - wget
           - "-O"
           - "/code/index.php"
-          - https://raw.githubusercontent.com/do-community/php-kubernetes/master/index.php
+          - https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/index.php
