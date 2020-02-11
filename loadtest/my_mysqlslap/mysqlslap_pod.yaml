@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysqlslap
+spec:
+  containers:
+  - name: mysqlslap
+    image: mysqlslap:v1
+    imagePullPolicy: Never
+  restartPolicy: Never
+

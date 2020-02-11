@@ -217,3 +217,41 @@ mysql> show databases;
 |-----------|-------|-------------|-----------------------------|
 * Opening service default/nginx in default browser...
 ```
+
+# Load testing Mysql using mysqlslap
+## Creating the image
+We will here create a docker image via a dockerfile and use it directly in minikube without pushing it onto a repository
+the dockerfile is here
+```bash
+# Set docker env
+{22:17}~/k8s-nginx-php/loadtest/my_mysqlslap:master ✗ ➭ eval $(minikube docker-env)
+
+{22:17}~/k8s-nginx-php/loadtest/my_mysqlslap:master ✗ ➭ docker build -t mysqlslap:v1 .
+Sending build context to Docker daemon  3.072kB
+Step 1/4 : FROM debian:buster
+...
+Successfully built 72d2ca4d287b
+Successfully tagged mysqlslap:v1
+```
+Your image should be present in minikube
+```bash
+{22:23}~/Seafile/Priv/Soft/k8s/k8s-nginx-php:master ✗ ➭ minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ docker image ls | grep mysqlsl
+mysqlslap                                 v1                  72d2ca4d287b        2 minutes ago       212MB
+```
+
+## Importing the [employee](https://dev.mysql.com/doc/index-other.html) database & Running the test
+```
+# Run in minikube
+kubectl apply -f loadtest/my_mysqlslap/mysqlslap_pod.yaml
+
+# Check that it's running
+kubectl get pods
+```
