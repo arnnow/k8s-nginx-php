@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: backend
+    spec:
+      volumes:
+      - name: php-files
+        hostPath:
+         path: /hosthome/arn/Seafile/Priv/Soft/k8s/nginx-php/files
+         type: Directory
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+          items:
+           - key: config
+             path: site.conf
+      containers:
+        - name: nginx
+          image: nginx:1.7.9
+          ports:
+           - containerPort: 80
+          volumeMounts:
+            - name: php-files
+              mountPath: /data
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d

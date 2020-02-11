@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  labels:
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: php
+        tier: backend
+    spec:
+      containers:
+      - name: php
+        image: php:7-fpm
+        volumeMounts:
+        - mountPath: /data
+          name: php-files
+      volumes:
+      - name: php-files
+        hostPath:
+          # directory location on host
+          path: /hosthome/arn/Seafile/Priv/Soft/k8s/nginx-php/files
+          # this field is optional
+          type: Directory
+      initContainers:
+        - name: install
+          image: busybox
+          volumeMounts:
+          - name: php-files
+            mountPath: /code
+          command:
+          - wget
+          - "-O"
+          - "/code/index.php"
+          - https://raw.githubusercontent.com/do-community/php-kubernetes/master/index.php
