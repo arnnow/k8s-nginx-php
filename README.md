@@ -209,7 +209,7 @@ mysql> show databases;
 ```
 # Visiting the site
 ```bash
-{21:36}~/Seafile/Priv/Soft/k8s/k8s-nginx-php:master ✗ ➭ minikube service nginx
+{21:36}~/k8s-nginx-php:master ✗ ➭ minikube service nginx
 |-----------|-------|-------------|-----------------------------|
 | NAMESPACE | NAME  | TARGET PORT |             URL             |
 |-----------|-------|-------------|-----------------------------|
