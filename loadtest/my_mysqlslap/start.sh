@@ -11,6 +11,4 @@ cd employees_db
 mysql -h mysql -uroot -pthisisnotsecure -t < employees.sql
 
 # Start loadtesting
-mysqlslap --user=root --password --host=mysql  --auto-generate-sql --verbose
-sleep 3600
-
+mysqlslap --no-defaults --user=root --password=thisisnotsecure --host=mysql --concurrency=5 --iterations=10 --create-schema=employees --query="SELECT * FROM dept_emp;" --verbose

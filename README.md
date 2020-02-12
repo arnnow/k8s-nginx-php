@@ -250,8 +250,11 @@ mysqlslap                                 v1                  72d2ca4d287b      
 ## Importing the [employee](https://dev.mysql.com/doc/index-other.html) database & Running the test
 ```
 # Run in minikube
-kubectl apply -f loadtest/my_mysqlslap/mysqlslap_pod.yaml
+kubectl apply -f loadtest/my_mysqlslap/mysqlslap_job.yaml
 
 # Check that it's running
-kubectl get pods
+kubectl get jobs,pods
+
+# Checking the logs
+kubectl logs -f pod/mysqlslap-xxxx
 ```
