@@ -13,7 +13,7 @@ You will need to create the directory beforehand in your minikube install
 | ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
 (_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
 
-$ mkdir /tmp/{mysql,php}
+$ mkdir /mnt/sda1/data/{mysql,php}
 $
 ```
 You can set the [PersistentVolume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes) & [PersistentVolumeClaim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims).
