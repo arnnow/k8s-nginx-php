@@ -32,8 +32,22 @@ spec:
           volumeMounts:
           - name: php-pv-storage
             mountPath: /code
-          command:
-          - wget
-          - "-O"
-          - "/code/index.php"
-          - https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/index.php
+          command: ['wget','-O','/code/guestbook.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/guestbook.php']
+        - name: install1
+          image: busybox
+          volumeMounts:
+          - name: php-pv-storage
+            mountPath: /code
+          command: ['wget','-O','/code/index.html','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/index.html']
+        - name: install2
+          image: busybox
+          volumeMounts:
+          - name: php-pv-storage
+            mountPath: /code
+          command: ['wget','-O','/code/controllers.js','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/controllers.js']
+        - name: install3
+          image: busybox
+          volumeMounts:
+          - name: php-pv-storage
+            mountPath: /code
+          command: ['wget','-O','/code/index.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/index.php']
