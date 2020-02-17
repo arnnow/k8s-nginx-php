@@ -17,7 +17,7 @@ if (isset($_GET['cmd']) === true) {
     $redis->set($_GET['key'], $_GET['value']);
     print('{"message": "Updated"}');
   } else {
-    $redis->connect(,getenv('REDIS_SERVICE_HOST'),)getenv('REDIS_SERVICE_PORT');
+    $redis->connect(,getenv('REDIS_SERVICE_HOST'),getenv('REDIS_SERVICE_PORT');
     $redis->set($_GET['key'], $_GET['value']);
 
     $value = $redis->get($_GET['key']);
