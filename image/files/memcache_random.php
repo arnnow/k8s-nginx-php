@@ -1,6 +1,6 @@
 <?php
 /* OO API */
-$memcache_obj = new Memcache;
+$memcache_obj = new Memcached;
 /* connect to memcached server */
 $memcache_obj->connect(getenv('MEMCACHED_SERVICE_HOST'), getenv('MEMCACHED_SERVICE_PORT'));
 
