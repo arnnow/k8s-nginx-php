@@ -14,7 +14,7 @@ function getRandomWord($len = 10) {
 set value of item with key 'var_key', using on-the-fly compression
 expire time is 50 seconds
 */
-key = getRandomWord()
+key = getRandomWord();
 $memcache_obj->set($key, getRandomWord(), MEMCACHE_COMPRESSED, 50);
 echo $memcache_obj->get($key);
 
