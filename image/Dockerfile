@@ -4,6 +4,7 @@ FROM php:7.4-fpm-alpine
 RUN apk add --no-cache $PHPIZE_DEPS \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && pecl install redis-5.2.0RC1 \
+    && pecl install memcache \
     && docker-php-ext-enable redis 
 
 COPY files/ /app/

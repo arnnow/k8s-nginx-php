@@ -22,6 +22,10 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: php-pv-storage
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "cp -r /app/. /data"]
       volumes:
       - name: php-pv-storage
         persistentVolumeClaim:
