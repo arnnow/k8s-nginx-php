@@ -51,3 +51,9 @@ spec:
           - name: php-pv-storage
             mountPath: /code
           command: ['wget','-O','/code/index.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/index.php']
+        - name: install4
+          image: busybox
+          volumeMounts:
+          - name: php-pv-storage
+            mountPath: /code
+          command: ['wget','-O','/code/index.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/memcache_random.php']
