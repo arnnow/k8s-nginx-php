@@ -56,4 +56,4 @@ spec:
           volumeMounts:
           - name: php-pv-storage
             mountPath: /code
-          command: ['wget','-O','/code/index.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/memcache_random.php']
+          command: ['wget','-O','/code/memcache_random.php','https://raw.githubusercontent.com/arnnow/k8s-nginx-php/master/files/memcache_random.php']
